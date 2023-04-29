@@ -11,7 +11,7 @@ const menuCloseBtn = document.querySelector(".hamburgerClose");
 const musicList = document.querySelector(".header");
 const overLay = document.querySelector(".overlay");
 const songList = document.querySelector(".songList");
-const theSound = document.getElementById("aSong")
+const theSound = document.getElementById("aSong");
 
 // const selectSong  = document.querySelectorAll(".eachSong")
 const playTheSong = document.getElementById("aSong");
@@ -79,6 +79,7 @@ let musicIndex = 1;
 window.addEventListener("load", () => {
   loadMusic(musicIndex);
 });
+
 //load music function
 function loadMusic(indexNumb) {
   songCover.src = `${allSongs[indexNumb - 1].cover}`;
@@ -117,28 +118,28 @@ function prevMusic() {
     null;
   }
 }
-songList.addEventListener("click", function(event) {
-  
+songList.addEventListener("click", function (event) {
   musicList.classList.remove("active");
   overLay.classList.remove("active");
   menuCloseBtn.classList.toggle("active");
   ctrIcon.classList.add("fa-pause");
   ctrIcon.classList.remove("fa-play");
 
-  if(event.target.tagName === 'LI'){
+  if (event.target.tagName === "LI") {
+    const clickedSong = event.target.textContent.trim();
+    const ourSong = allSongs.find((n) => n.title === clickedSong);
 
-    const clickedSong = event.target.textContent.trim()
-    
-    const ourSong = allSongs.find(n => n.title === clickedSong);
-
-      if (ourSong) {
-        song.src = ourSong.path
-        
-        song.play()
-        ctrIcon.classList.add("fa-pause");
-        ctrIcon.classList.remove("fa-play");
-      }else{
-        console.log("song is not on the list")
+    // loadMusic(musicIndex);
+    if (ourSong) {
+      song.src = ourSong.path;
+      songCover.src = ourSong.cover;
+      songTitle.innerHTML = ourSong.title;
+      artiste.innerHTML = ourSong.artist;
+      song.play();
+      ctrIcon.classList.add("fa-pause");
+      ctrIcon.classList.remove("fa-play");
+    } else {
+      console.log("song is not on the list");
     }
   }
-})
+});
