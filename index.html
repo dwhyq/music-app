@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link href="/style.css" rel="stylesheet" />
+    <script
+      src="https://kit.fontawesome.com/4ef6f0f2de.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="overlay"></div>
+      <div class="hamburger" onclick="showMusicList">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+      <div class="hamburgerClose" onclick="closeMusicList">
+        <i class="fa fa-times"></i>
+      </div>
+
+      <div class="header">
+        <ul class="songList">
+          <li id="aSong">The_Scientist</li>
+
+          <li id="aSong">Cocaine</li>
+
+          <li id="aSong">Lento</li>
+
+          <li id="aSong">Gaza</li>
+
+          <li id="aSong">Love Again</li>
+          
+          <li id="aSong">Bad Habits</li>
+        </ul>
+      </div>
+
+      <div class="about-song">
+        <img src="" class="songCover" />
+        <h1 class="songTitle"></h1>
+        <p class="artiste"></p>
+        <!-- adding "controls" as an attribute to an audio tag will show you the audio control buttons -->
+        <audio src="" id="song"></audio>
+        <input type="range" value="0" id="progress" />
+      </div>
+
+      <div class="controls">
+        <div onclick="prevMusic()">
+          <i class="fa-solid fa-backward" id="back"></i>
+        </div>
+        <div onclick="playPause()">
+          <i class="fa-solid fa-play" id="ctrIcon"></i>
+        </div>
+        <div onclick="nextMusic()">
+          <i class="fa-solid fa-forward" id="next"></i>
+        </div>
+      </div>
+    </div>
+    <script src="/data.js"></script>
+    <script src="/scripts.js"></script>
+  </body>
+</html>
