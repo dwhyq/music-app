@@ -66,7 +66,7 @@ if (song.play) {
   }, 500);
 }
 
-//when the progress slider is moved forward in bid to fast-forward the song
+//when the progress slider is moved forward in a bid to fast-forward the song
 
 progress.onchange = function () {
   song.play();
@@ -87,57 +87,68 @@ function loadMusic(indexNumb) {
   artiste.innerHTML = allSongs[indexNumb - 1].artist;
   song.src = `${allSongs[indexNumb - 1].path}`;
 }
+// when the song finishes playing, play the next song
+song.addEventListener("ended", () => {
+  musicIndex++;
+  if (musicIndex > allSongs.length) {
+    musicIndex = 1;
+  }
+  loadMusic(musicIndex);
+  song.play();
+  ctrIcon.classList.add("fa-pause");
+  ctrIcon.classList.remove("fa-play");
+});
+
 //go to the next music
 nextBtn.addEventListener("click", nextMusic);
 
 function nextMusic() {
   //we'd just increment by 1
   musicIndex++;
+  if (musicIndex > allSongs.length) {
+    musicIndex = 1;
+  }
   loadMusic(musicIndex);
   song.play();
-
-  if (song.play()) {
-    ctrIcon.classList.add("fa-pause");
-    ctrIcon.classList.remove("fa-play");
-  } else {
-    null;
-  }
+  ctrIcon.classList.add("fa-pause");
+  ctrIcon.classList.remove("fa-play");
 }
+
 //go to the previous music
 backBtn.addEventListener("click", prevMusic);
+
 function prevMusic() {
   //we'd just decrement by 1
   musicIndex--;
+  if (musicIndex < 1) {
+    musicIndex = allSongs.length;
+  }
   loadMusic(musicIndex);
   song.play();
-
-  if (song.play()) {
-    ctrIcon.classList.add("fa-pause");
-    ctrIcon.classList.remove("fa-play");
-  } else {
-    null;
-  }
+  ctrIcon.classList.add("fa-pause");
+  ctrIcon.classList.remove("fa-play");
 }
-songList.addEventListener("click", function (event) {
+
+// close menu slide after a song is selected
+songList.addEventListener("click", (event) => {
   musicList.classList.remove("active");
   overLay.classList.remove("active");
   menuCloseBtn.classList.toggle("active");
   ctrIcon.classList.add("fa-pause");
   ctrIcon.classList.remove("fa-play");
 
-  if (event.target.tagName === "LI") {
+  // play selected song on the playlist
+  if (event.target.tagName == "LI") {
     const clickedSong = event.target.textContent.trim();
     const ourSong = allSongs.find((n) => n.title === clickedSong);
 
-    // loadMusic(musicIndex);
     if (ourSong) {
-      song.src = ourSong.path;
-      songCover.src = ourSong.cover;
-      songTitle.innerHTML = ourSong.title;
-      artiste.innerHTML = ourSong.artist;
+      const { title, path, cover, artist } = ourSong;
+      song.src = path;
+      songCover.src = cover;
+      songTitle.innerHTML = title;
+      artiste.innerHTML = artist;
       song.play();
-      ctrIcon.classList.add("fa-pause");
-      ctrIcon.classList.remove("fa-play");
     } else {
       console.log("song is not on the list");
     }
