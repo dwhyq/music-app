@@ -231,3 +231,13 @@ body {
     background: #f53192;
     color: white;
 }
+.spin {
+    animation: spin 9s linear infinite;
+  }
+  
+  @keyframes spin {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

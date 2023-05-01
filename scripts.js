@@ -51,10 +51,12 @@ function playPause() {
     song.pause();
     ctrIcon.classList.remove("fa-pause");
     ctrIcon.classList.add("fa-play");
+    songCover.classList.remove("spin"); // Remove the spin class when paused
   } else {
     song.play();
     ctrIcon.classList.add("fa-pause");
     ctrIcon.classList.remove("fa-play");
+    songCover.classList.add("spin"); // Add the spin class when playing
   }
 }
 
@@ -112,6 +114,7 @@ function nextMusic() {
   song.play();
   ctrIcon.classList.add("fa-pause");
   ctrIcon.classList.remove("fa-play");
+  songCover.classList.add("spin"); // Spin song cover when loading song
 }
 
 //go to the previous music
@@ -127,6 +130,7 @@ function prevMusic() {
   song.play();
   ctrIcon.classList.add("fa-pause");
   ctrIcon.classList.remove("fa-play");
+  songCover.classList.add("spin"); // Spin song cover when loading song
 }
 
 // close menu slide after a song is selected
@@ -136,6 +140,7 @@ songList.addEventListener("click", (event) => {
   menuCloseBtn.classList.toggle("active");
   ctrIcon.classList.add("fa-pause");
   ctrIcon.classList.remove("fa-play");
+  songCover.classList.add("spin"); // Spin song cover when loading song
 
   // play selected song on the playlist
   if (event.target.tagName == "LI") {
